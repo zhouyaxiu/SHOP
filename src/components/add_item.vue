@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {defineProps} from "vue";
+import {ElNotification} from "element-plus";
 defineProps({
     addItem:Object
 })
@@ -7,13 +8,13 @@ defineProps({
 function defaultHandler(){
 
 }
-// 编辑
-function editHandler(){
+// // 编辑
+// function editHandler(){
 
-}
+// }
 // 删除
 function delHandler(){
-
+  ElNotification.success({title:'删除成功'})
 }
 </script>
 
@@ -26,7 +27,22 @@ function delHandler(){
         <div>收货地址：{{addItem.address}}</div>
       </el-col>
       <el-col :span="6" class="address_right">
-        <div v-if="addItem.isdefault==0"><span @click="defaultHandler(addItem.id)" class="marginr10">设为默认</span><span @click="editHandler" class="marginr10">编辑</span><span @click="delHandler">删除</span></div>
+        <div v-if="addItem.isdefault==0">
+          <span @click="defaultHandler(addItem.id)" class="marginr10">设为默认</span>
+          <span @click="$emit('edit',addItem)" class="marginr10">编辑</span>
+          <el-popconfirm
+            confirm-button-text="确定"
+            cancel-button-text="取消"
+            :icon="InfoFilled"
+            icon-color="#626AEF"
+            title="确定要删除该地址嘛？"
+            @confirm="delHandler"
+          >
+            <template #reference>
+              <span>删除</span>
+            </template>
+          </el-popconfirm>
+        </div>
         <div v-else><el-tag class="ml-2" type="danger">默认</el-tag></div>
       </el-col>
     </el-row>

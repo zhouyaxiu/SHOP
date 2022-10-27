@@ -12,14 +12,6 @@ import CustomInput from './components/inputm.vue'
   <header class="main_wrapper">
     <div class="wrapper">
       <Header />
-      <!-- <CustomInput v-model="searchText" /> -->
-
-      <!-- INPUT  -->
-
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
     </div>
   </header>
 

@@ -24,7 +24,11 @@ const toUrl = (routeUrl: string) => {
         </el-col>
         <el-col :span="10">
           <el-row>
-            <el-col :span="12" @click="toUrl('/cart')" class="cursor">购物车</el-col>
+            <el-col :span="12" @click="toUrl('/cart')" class="cursor">
+              <el-badge :value="12" class="item">
+                <el-button>购物车</el-button>
+              </el-badge>
+            </el-col>
             <el-col :span="12" @click="toUrl('/user')" class="cursor">我的</el-col>
           </el-row>
         </el-col>

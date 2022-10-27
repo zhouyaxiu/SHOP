@@ -5,6 +5,11 @@ export const userRoutes=[
         component: () => import('@/views/UserView.vue'),
         children: [
           {
+            path: "index",
+            name:"index",
+            component: () => import('@/views/UserIndexView.vue'),
+          },
+          {
             path: "collect",
             name:"collect",
             component: () => import('@/views/UserCollectView.vue'),

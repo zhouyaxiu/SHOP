@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref,watch,onMounted } from 'vue'
+import { ref,watch,onMounted, reactive } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 const item = {
   date: '2016-05-02',
@@ -20,6 +20,11 @@ onMounted(()=>{
 })
 
 const activeMenu=ref("/user")
+const defaultOpen=reactive([1,2])
+
+const closeHandler=(event:any)=>{
+  defaultOpen.value=[1,2]
+}
 </script>
 
 <template>
@@ -31,7 +36,7 @@ const activeMenu=ref("/user")
             <img alt="用户头像" class="bor50 bgselected" src="@/assets/logo.svg" width="70" height="70" />
             <div>jAJSJHH</div>
           </div>
-          <el-menu router :default-active="activeMenu" :default-openeds="['1', '2']" text-color="#bfcbd9" active-text-color="#20a0ff">
+          <el-menu router @close="closeHandler" :default-active="activeMenu" :default-openeds="defaultOpen" text-color="#bfcbd9" active-text-color="#20a0ff">
             <el-sub-menu index="1" expand-open-icon="false" expand-close-icon="false">
               <template #title>
                 <el-icon><message /></el-icon>订单中心
@@ -47,9 +52,9 @@ const activeMenu=ref("/user")
               </template>
               <el-menu-item-group>
                 <!-- <template #title>个人中心</template> -->
-                <el-menu-item index="/user">我的个人中心</el-menu-item>
+                <el-menu-item index="/user/index">我的个人中心</el-menu-item>
                 <el-menu-item index="/user/address">收货地址</el-menu-item>
-                <el-menu-item index="/user/cart">购物车</el-menu-item>
+                <!-- <el-menu-item index="/user/cart">购物车</el-menu-item> -->
                 <el-menu-item index="/user/collect">我的收藏</el-menu-item>
               </el-menu-item-group>
             </el-sub-menu>
