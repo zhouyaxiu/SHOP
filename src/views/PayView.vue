@@ -6,6 +6,15 @@
   <div class="main_wrapper product">
     <div>支付成功</div>
     <div>￥99</div>
+    <el-result
+      icon="success"
+      title="Success Tip"
+      sub-title="Please follow the instructions"
+    >
+      <template #extra>
+        <el-button type="primary">Back</el-button>
+      </template>
+    </el-result>
     <div>
       <el-descriptions
         title="Vertical list with border"

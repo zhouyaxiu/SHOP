@@ -34,7 +34,7 @@ const handleChange = (value: number) => {
           <div>
             <div class="f18 marginb10">我是商品一号</div>
             <div class="f12 c999 marginb20">舒适纯棉有弹性</div>
-            <div class="f12 c999">原价：¥444</div>
+            <div class="f12 c999 oldprice">原价：¥444</div>
             <div class="f18 marginb20">¥444</div>
             <div class="f14 marginb20">
               <span class="marginr30">月销量：2222</span><el-divider direction="vertical" class="marginr30" /><span>库存：292</span>
@@ -99,4 +99,5 @@ const handleChange = (value: number) => {
 .historylist{border:1px solid #dedede;}
 .historyitem:last-child{border-bottom: 0;}
 .historyitem img{width:60%;border-radius: 4px;}
+.oldprice{text-decoration: line-through;}
 </style>

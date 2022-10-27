@@ -2,15 +2,16 @@ import {defineStore} from "pinia";
 export const store=defineStore("store",{
     state:()=>{
         return {
-            islogin:false
+            islogin:false,
+            isCollapse:false
         }
     },
     getters:{
         
     },
     actions:{
-        // handleCollapse(){
-        //     this.collapse=!this.collapse;
-        // }
+        handleCollapse(state:any){
+            state.isCollapse=!state.isCollapse;
+        }
     }
 })

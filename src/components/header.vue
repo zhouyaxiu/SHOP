@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const toUrl = (routeUrl: string) => {
-  console.log(routeUrl)
   router.push(routeUrl)
 }
 </script>
@@ -18,15 +17,15 @@ const toUrl = (routeUrl: string) => {
       <el-row :align="middle">
         <el-col :span="14">
           <el-row>
-            <el-col :span="8" @click="toUrl('/home')">首页</el-col>
-            <el-col :span="8" @click="toUrl('/product')">产品中心</el-col>
-            <el-col :span="8" @click="toUrl('/contact')">联系我们</el-col>
+            <el-col :span="8" @click="toUrl('/home')" class="cursor">首页</el-col>
+            <el-col :span="8" @click="toUrl('/product')" class="cursor">产品中心</el-col>
+            <el-col :span="8" @click="toUrl('/contact')" class="cursor">联系我们</el-col>
           </el-row>
         </el-col>
         <el-col :span="10">
           <el-row>
-            <el-col :span="12" @click="toUrl('/cart')">购物车</el-col>
-            <el-col :span="12" @click="toUrl('/user')">我的</el-col>
+            <el-col :span="12" @click="toUrl('/cart')" class="cursor">购物车</el-col>
+            <el-col :span="12" @click="toUrl('/user')" class="cursor">我的</el-col>
           </el-row>
         </el-col>
       </el-row>
@@ -34,7 +33,3 @@ const toUrl = (routeUrl: string) => {
   </el-row>
 
 </template>
-
-<style>
-
-</style>

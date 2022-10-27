@@ -18,9 +18,12 @@ const addList=ref<AddItem[]>([
 </script>
 
 <template>
-  <div class="title line">
-    <div v-for="item in addList" :key="item.id">
-      <Item :proItem="item" />
-    </div>
+  <div class="pad16">
+    <div class="f18 ">我的订单</div>
   </div>
+  <el-main>
+    <div v-for="item in addList" :key="item.id">
+      <Item :addItem="item" />
+    </div>
+  </el-main>
 </template>
