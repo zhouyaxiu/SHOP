@@ -18,7 +18,7 @@ const goDetail=(id:string) => {
 </script>
 
 <template>
-  <div class="">
+  <div class="cursor">
     <el-card :body-style="{ padding: '0px' }" @click="goDetail(proItem.id)">
       <el-image
         :src="proItem.pic"
@@ -34,3 +34,7 @@ const goDetail=(id:string) => {
     </el-card>
   </div>
 </template>
+<style scoped>
+.cursor .el-card:hover{background: #ec7243;}
+.cursor .el-card:hover .marginb6,.cursor .el-card:hover .ec7,.cursor .el-card:hover .c999{color:#fff;}
+</style>

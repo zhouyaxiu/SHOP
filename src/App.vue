@@ -1,24 +1,19 @@
 <script setup lang="ts">
-import {ref} from "vue"
-import { RouterLink, RouterView } from 'vue-router'
+import {onMounted} from "vue"
 import Header from './components/header.vue'
 import Footer from './components/footer.vue'
-import CustomInput from './components/inputm.vue'
-// const searchText=ref(0)
-
+onMounted(()=>{
+  window.onresize=()=>{
+    // windowHeight.value=document.documentElement.clientHeight-231
+  }
+})
 </script>
 
 <template>
-  <header class="main_wrapper">
-    <div class="wrapper">
-      <Header />
-    </div>
+  <header class="borb">
+    <Header class="main_wrapper" />
   </header>
 
-  <div><RouterView /></div>
+  <RouterView />
   <Footer class="b99">Footer</Footer>
 </template>
-
-<style scoped>
-
-</style>

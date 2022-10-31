@@ -2,13 +2,7 @@
 import {ref,reactive} from "vue";
 import type {FormInstance,FormRules} from "element-plus";
 import Item from '../components/add_item.vue'
-interface AddItem {
-  id:number;
-  username:string,
-  mobile:number,
-  address:string,
-  isdefault:number
-}
+import type {AddItem} from "../type/BaseType"
 const addList=ref<AddItem[]>([
   {id:1,username:'作笑颜',mobile:181818181,address:'苏州市工地上干活法国',isdefault:1},
   {id:2,username:'方式告诉对方',mobile:181818181,address:'er也让也容易热议',isdefault:0},

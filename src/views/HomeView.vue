@@ -2,19 +2,8 @@
 import {ref} from "vue";
 import vTitle from '../components/title.vue'
 import Item from '../components/pro_item.vue'
+import type {BannerItem,ProItem} from "../type/BaseType"
 
-interface BannerItem {
-  id:number;
-  pic:string
-}
-interface ProItem {
-  id:number
-  goodsname:string
-  pic:string
-  sale:number
-  rule:string
-  price:number
-}
 const bannerList=ref<BannerItem[]>([
   {pic:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',id:0},
   {pic:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',id:1},

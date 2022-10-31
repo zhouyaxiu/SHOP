@@ -26,7 +26,7 @@ function delHandler(){
         <div class="marginb6">收货人：{{addItem.username}}<span class="marginl10">{{addItem.mobile}}</span></div>
         <div>收货地址：{{addItem.address}}</div>
       </el-col>
-      <el-col :span="6" class="address_right">
+      <el-col :span="6" class="address_right right">
         <div v-if="addItem.isdefault==0">
           <span @click="defaultHandler(addItem.id)" class="marginr10">设为默认</span>
           <span @click="$emit('edit',addItem)" class="marginr10">编辑</span>

@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type {cartItem} from "../type/BaseType"
 
 const radio1 = ref('1')
 
-interface cartItem{
-  id:number
-  goodsname:string
-  goodsprice:string
-  goodsnum:number,
-  count:number
-}
+
 const cartList:cartItem[]=[
   {
     id:1,

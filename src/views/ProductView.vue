@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import type {ProItem} from "../type/BaseType"
+
 import Item from '../components/pro_item.vue'
-interface ProItem {
-  id:number
-  goodsname:string
-  pic:string
-  sale:number
-  rule:string
-  price:number
-}
+
 const proList=ref<ProItem[]>([
   {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:0,sale:100,rule:'性感',price:100},
   {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:1,sale:100,rule:'性感',price:100},

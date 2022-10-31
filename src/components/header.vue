@@ -14,7 +14,7 @@ const toUrl = (routeUrl: string) => {
       <img alt="Vue logo" class="logo mid" src="@/assets/logo.svg" width="125" height="60" />
     </el-col>
     <el-col :span="20">
-      <el-row :align="middle">
+      <el-row align="middle" class="f14">
         <el-col :span="14">
           <el-row>
             <el-col :span="8" @click="toUrl('/home')" class="cursor">首页</el-col>
@@ -23,13 +23,17 @@ const toUrl = (routeUrl: string) => {
           </el-row>
         </el-col>
         <el-col :span="10">
-          <el-row>
-            <el-col :span="12" @click="toUrl('/cart')" class="cursor">
+          <el-row align="middle">
+            <el-col :span="12" @click="toUrl('/cart')" class="cursor center">
               <el-badge :value="12" class="item">
-                <el-button>购物车</el-button>
+                <el-icon size="22px"><ShoppingTrolley /></el-icon>
+                <div class="f12">购物车</div>
               </el-badge>
             </el-col>
-            <el-col :span="12" @click="toUrl('/user')" class="cursor">我的</el-col>
+            <el-col :span="12" @click="toUrl('/user/order')" class="cursor center">
+            <el-icon size="22px"><User /></el-icon>
+            <div class="f12">我的</div>
+            </el-col>
           </el-row>
         </el-col>
       </el-row>

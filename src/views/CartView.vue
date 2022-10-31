@@ -1,26 +1,17 @@
 <script setup lang="ts">
 import {ref,computed,watchEffect} from "vue"
 // import {TabsPaneContext} from "element-plus"
-
-interface cartItem{
-  id:number
-  goodsname:string
-  goodsprice:string
-  goodsnum:number,
-  count:number
-}
+import type {cartItem,ProItem} from "../type/BaseType"
+import {useUserStore} from '../store/index';
+console.log(useUserStore,'store')
 const multipleSelection = ref<cartItem[]>([])
+const cartList:cartItem[]=[]
 const count=computed((val)=>{
   let sum=0;
   cartList.map((item)=>{return sum+(Number(item.goodsprice)*item.goodsnum)},0)
-  console.log(sum,'sis')
   return sum;
 })
-// watchEffect(()=>{
-//   let sum=0;
-//   cartList.map((item)=>{return sum+(Number(item.goodsprice)*item.goodsnum)},0)
-//   console.log(sum,'sis')
-// })
+
 const handleSelectionChange = (val: cartItem[]) => {
   multipleSelection.value = val
 }
@@ -50,31 +41,9 @@ const clearHandler=(index:number,row:cartItem)=>{
 // 数量变动
 const handleChange = (value: number,index:number) => {
   cartList[index].count=Number(cartList[index].goodsprice)*cartList[index].goodsnum
-  console.log(value,index,cartList,'skskks')
   return count
 }
-const cartList:cartItem[]=[
-  {
-    id:1,
-    goodsname: '阿达说法萨芬',
-    goodsprice: '192',
-    goodsnum: 1,
-    count:192
-  },{
-    id:2,
-    goodsname: '而恒天然恒天然和',
-    goodsprice: '345',
-    goodsnum: 2,
-    count:192
-  },{
-    id:3,
-    goodsname: '阿发是否',
-    goodsprice: '13',
-    goodsnum: 3,
-    count:192
-  },
-  
-]
+
 
 const activeName=ref('first')
 const handleClick=(tab:any,event:any)=>{
@@ -84,14 +53,7 @@ const handleClick=(tab:any,event:any)=>{
 
 // 产品
 import Item from '../components/pro_item.vue'
-interface ProItem {
-  id:number
-  goodsname:string
-  pic:string
-  sale:number
-  rule:string
-  price:number
-}
+
 const proList=ref<ProItem[]>([
   {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:0,sale:100,rule:'性感',price:100},
   {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:1,sale:100,rule:'性感',price:100},
@@ -100,10 +62,18 @@ const proList=ref<ProItem[]>([
   {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:4,sale:100,rule:'性感',price:100},
   {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:5,sale:100,rule:'性感',price:100},
 ])
+// 全选
+const allCheckHandler=(event:any)=>{
+  if(event){
+    multipleSelection.value=cartList
+  }else{
+    multipleSelection.value=[]
+  }
+}
 </script>
 
 <template>
-  <div class="main_wrapper">
+  <div class="main_wrapper cart pad16">
     <el-table
       ref="multipleTableRef"
       :data="cartList"
@@ -139,7 +109,7 @@ const proList=ref<ProItem[]>([
     </el-table>
     <div class="cartmsg pad10 f14">
       <el-row class="row-bg" justify="space-between" align="middle">
-        <el-col :span="3"><el-checkbox class="mid">全选</el-checkbox><span class="marginl10 mid cursor">删除</span></el-col>
+        <el-col :span="3"><el-checkbox class="mid" @change="allCheckHandler">全选</el-checkbox><span class="marginl10 mid cursor">删除</span></el-col>
         <el-col :span="9">
           <span @click="clearHandler" class="marginr10 cursor">清空购物车</span>
           <span @click="moveHandler" class="cursor">移入收藏夹</span>
@@ -168,4 +138,8 @@ const proList=ref<ProItem[]>([
 </template>
 <style scoped>
 .cartmsg{background:#ededed}
+</style>
+<style>
+.cart .el-tabs__item.is-active,.cart .el-tabs__item:hover{color:#ec7243;}
+.cart .el-tabs__active-bar{background: #ec7243;}
 </style>
