@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref,onMounted,} from 'vue'
+import { useRouter } from 'vue-router';
+import { ref,onMounted,watchEffect} from 'vue'
+const router = useRouter();
 const item = {
   date: '2016-05-02',
   name: 'Tom',
@@ -7,16 +9,17 @@ const item = {
 }
 const tableData = ref(Array.from({ length: 20 }).fill(item))
 
-const windowHeight=ref(document.documentElement.clientHeight-231);
-
-onMounted(()=>{
-  window.onresize=()=>{
-    windowHeight.value=document.documentElement.clientHeight-231
-  }
-})
-
+import  {useInfoStore} from '../store';
+const store = useInfoStore()
+const windowHeight=store.windowHeight
 const activeMenu=ref("/user/order")
-
+watchEffect(() => {
+  router.getRoutes().map((item, index) => {
+    if(item.path === router.currentRoute.value.path){
+      activeMenu.value = router.currentRoute.value.path
+    }
+  })
+})
 </script>
 
 <template>
@@ -34,16 +37,16 @@ const activeMenu=ref("/user/order")
                 <el-icon><Checked /></el-icon>个人中心
               </template>
             </el-sub-menu>
-            <el-menu-item index="/user/order" class="bff center">我的订单</el-menu-item>
+            <el-menu-item index="/user/order" :class="[{ ec7: activeMenu == '/user/order' }, 'bff center']">我的订单</el-menu-item>
             <el-sub-menu :index="1" expand-open-icon="false" expand-close-icon="false">
               <template #title>
                 <el-icon><UserFilled /></el-icon>订单中心
               </template>
             </el-sub-menu>
-            <el-menu-item index="/user/index" class="bff center">我的个人中心</el-menu-item>
-            <el-menu-item index="/user/address" class="bff center">收货地址</el-menu-item>
+            <el-menu-item index="/user/index" :class="[{ ec7: activeMenu == '/user/index' }, 'bff center']">我的个人中心</el-menu-item>
+            <el-menu-item index="/user/address" :class="[{ ec7: activeMenu == '/user/address' }, 'bff center']">收货地址</el-menu-item>
             <!-- <el-menu-item index="/user/cart">购物车</el-menu-item> -->
-            <el-menu-item index="/user/collect" class="bff center">我的收藏</el-menu-item>
+            <el-menu-item index="/user/collect" :class="[{ ec7: activeMenu == '/user/collect' }, 'bff center']">我的收藏</el-menu-item>
           </el-menu>
         </el-scrollbar>
       </el-aside>

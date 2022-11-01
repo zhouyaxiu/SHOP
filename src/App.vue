@@ -3,9 +3,9 @@ import {onMounted} from "vue"
 import Header from './components/header.vue'
 import Footer from './components/footer.vue'
 onMounted(()=>{
-  window.onresize=()=>{
-    // windowHeight.value=document.documentElement.clientHeight-231
-  }
+  // window.onresize=()=>{
+  //   // windowHeight.value=document.documentElement.clientHeight-231
+  // }
 })
 </script>
 

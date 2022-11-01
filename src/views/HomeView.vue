@@ -31,7 +31,7 @@ const handleClick = (tab, event: Event) => {
     </el-carousel-item>
   </el-carousel>
   <!-- 分类导航 -->
-  <main class="main_wrapper">
+  <main class="main_wrapper home">
     <div>
       <!-- <v-title title="分类导航"></v-title> -->
       <el-row class="cff">
@@ -107,28 +107,28 @@ const handleClick = (tab, event: Event) => {
       <el-row :gutter="20" justify="space-between" class="cff center">
         <el-col :span="6">
           <div class="ban_nav_item cursor">
-            <div class="ban_nav_item_icon"><el-icon :size="36"><FullScreen /></el-icon></div>
+            <div class="ban_nav_item_icon"><el-icon :size="36"><img src="../assets/icon1.png" width="60"  /></el-icon></div>
             <div class="ban_nav_item_line"></div>
             <div class="ban_nav_item_text">纯棉类</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="ban_nav_item cursor">
-            <div class="ban_nav_item_icon"><el-icon :size="36"><FullScreen /></el-icon></div>
+            <div class="ban_nav_item_icon"><el-icon :size="36"><img src="../assets/icon1.png" width="60"  /></el-icon></div>
             <div class="ban_nav_item_line"></div>
             <div class="ban_nav_item_text">纯棉类</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="ban_nav_item cursor">
-            <div class="ban_nav_item_icon"><el-icon :size="36"><FullScreen /></el-icon></div>
+            <div class="ban_nav_item_icon"><el-icon :size="36"><img src="../assets/icon1.png" width="60"  /></el-icon></div>
             <div class="ban_nav_item_line"></div>
             <div class="ban_nav_item_text">纯棉类</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="ban_nav_item cursor">
-            <div class="ban_nav_item_icon"><el-icon :size="36"><FullScreen /></el-icon></div>
+            <div class="ban_nav_item_icon"><el-icon :size="36"><img src="../assets/icon1.png" width="60"  /></el-icon></div>
             <div class="ban_nav_item_line"></div>
             <div class="ban_nav_item_text">纯棉类</div>
           </div>
@@ -206,7 +206,7 @@ const handleClick = (tab, event: Event) => {
     </div>
 
     <!-- 热销推荐其他 -->
-    <div>
+    <div class="marginb20">
       <el-tabs v-model="activeName" class="marginb20" @tab-click="handleClick" activecolor="red" color="black">
         <el-tab-pane label="纯棉" name="first">
           <el-row justify="space-between" gutter="10">
@@ -243,4 +243,8 @@ const handleClick = (tab, event: Event) => {
 .classify .el-col .classify_item:hover{background:linear-gradient(to right, #dd7a46,#eb7d4a, #ee7b4d,#e78053);}
 .classify img{width:120px;height:120px;border-radius: 50%;}
 .classify .goodstitle{position: absolute;top: 10px;left: 10px;writing-mode: tb;position: absolute;top: 10px;left: 10px;writing-mode: tb;max-height: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+</style>
+<style>
+.home .el-tabs__item.is-active,.cart .el-tabs__item:hover{color:#ec7243;}
+.home .el-tabs__active-bar{background: #ec7243;}
 </style>

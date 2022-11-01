@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type {cartItem} from "../type/BaseType"
-
+import SysDialog from "@/components/SysDialog.vue";
+import useDialog from "@/hooks/useDialog";
+const { dialog, onClose, onConfirm } = useDialog();
 const radio1 = ref('1')
 
 
@@ -27,11 +29,18 @@ const cartList:cartItem[]=[
   },
   
 ]
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+// 结算
+const settleHandler=()=>{
+  router.push("/pay")
+}
 </script>
 
 <template>
   <div class="main_wrapper confirm">
-    <div class="marginb20">
+    <div class="marginb36 padt10">
       <div class="bold f18 borb padb10 marginb10">选择收货地址</div>
       <div class="flex acenter f14 marginb10">
         <div><el-icon><LocationInformation /></el-icon></div>
@@ -45,16 +54,16 @@ const cartList:cartItem[]=[
         </div>
       </div>
     </div>
-    <div class="marginb20">
+    <div class="marginb36">
       <div class="bold f18 borb padb10 marginb10">配送方式</div>
       <div>顺丰快递</div>
     </div>
-    <div class="marginb20">
+    <div class="marginb36">
       <div class="bold f18 borb padb10 marginb10">支付方式</div>
       <div>
-        <el-radio-group v-model="radio1" class="ml-4">
-          <el-radio label="1" size="large">支付宝支付</el-radio>
-          <el-radio label="2" size="large">微信支付</el-radio>
+        <el-radio-group v-model="radio1" class="ml-4" text-color="#ffffff" fill="#333333">
+          <el-radio-button label="1" size="large">支付宝支付</el-radio-button>
+          <el-radio-button label="2" size="large">微信支付</el-radio-button>
         </el-radio-group>
       </div>
     </div>
@@ -66,10 +75,9 @@ const cartList:cartItem[]=[
           :data="cartList"
           style="width: 100%"
           @selection-change="handleSelectionChange"
-          
         >
           <el-table-column type="selection" width="55" />
-          <el-table-column label="商品信息" width="120">
+          <el-table-column label="商品信息" minWidth="220">
             <template #default="scope">{{ scope.row.goodsname }}</template>
           </el-table-column>
           <el-table-column property="goodsprice" label="单价" width="120">
@@ -96,23 +104,37 @@ const cartList:cartItem[]=[
           </el-table-column>
         </el-table>
       </div>
-      <div class="flex">
-        <span class="marginr6">给我留言：</span>
-        <el-input
-          v-model="textarea2"
-          :autosize="{ minRows: 2, maxRows: 4 }"
-          type="textarea"
-          placeholder="留言已和商家确认"
-        />
-      </div>
+      <el-row>
+        <el-col :span="2" class="right"><span>给我留言：</span></el-col>
+        <el-col :span="22">
+          <el-input
+            v-model="textarea2"
+            :autosize="{ minRows: 2, maxRows: 4 }"
+            type="textarea"
+            placeholder="留言已和商家确认"
+          />
+        </el-col>
+      </el-row>
     </div>
     <el-divider />
     <div class="right marginb20">
         <span>已选商品 阿德撒旦1 件</span>
         <span class="marginr30">合计（不含运费）：<span class="ec7">￥1200</span></span>
-        <el-button color="#e25a3a">结算</el-button>
+        <el-button color="#ec7243" :dark="isDark" class="custom_btn" @click="settleHandler">结算</el-button>
     </div>
   </div>
+  <!-- 物流弹框 -->
+  <sys-dialog
+    :visible="dialog.visible"
+    @onClose="onClose"
+    @onConfirm="onConfirm"
+  >
+    <template v-slot:content>
+      <addAddress @onClose="onClose"
+    @onConfirm="onConfirm"></addAddress>
+    </template>
+  </sys-dialog>
 </template>
-<style scoped>
+<style>
+
 </style>

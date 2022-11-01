@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import {ref,computed,watchEffect} from "vue"
+import {ref,computed,onMounted} from "vue"
+import Item from '../components/pro_item.vue'
 // import {TabsPaneContext} from "element-plus"
 import type {cartItem,ProItem} from "../type/BaseType"
-import {useUserStore} from '../store/index';
-console.log(useUserStore,'store')
+import  {useInfoStore} from '../store';
+const store = useInfoStore()
+// const {scartList} = storeToRefs(store)
 const multipleSelection = ref<cartItem[]>([])
-const cartList:cartItem[]=[]
+const cartList:cartItem[]=store.cartList
 const count=computed((val)=>{
   let sum=0;
   cartList.map((item)=>{return sum+(Number(item.goodsprice)*item.goodsnum)},0)
@@ -15,17 +17,14 @@ const count=computed((val)=>{
 const handleSelectionChange = (val: cartItem[]) => {
   multipleSelection.value = val
 }
-// 移入收藏夹
-const handleEdit=(index:number,row:cartItem)=>{
-  console.log(index,row,'roww')
-}
+
 // 删除
 const handleDelete=(index:number,row:cartItem)=>{
 
 }
 // 移入收藏夹
 const moveHandler=(index:number,row:cartItem)=>{
-
+ console.log(index,row,'roww')
 }
 import { useRouter } from 'vue-router';
 
@@ -50,18 +49,8 @@ const handleClick=(tab:any,event:any)=>{
   console.log(tab,event)
 }
 
-
 // 产品
-import Item from '../components/pro_item.vue'
-
-const proList=ref<ProItem[]>([
-  {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:0,sale:100,rule:'性感',price:100},
-  {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:1,sale:100,rule:'性感',price:100},
-  {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:2,sale:100,rule:'性感',price:100},
-  {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:3,sale:100,rule:'性感',price:100},
-  {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:4,sale:100,rule:'性感',price:100},
-  {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:5,sale:100,rule:'性感',price:100},
-])
+const proList:ProItem[]=store.proList
 // 全选
 const allCheckHandler=(event:any)=>{
   if(event){
@@ -79,6 +68,7 @@ const allCheckHandler=(event:any)=>{
       :data="cartList"
       style="width: 100%"
       @selection-change="handleSelectionChange"
+      v-if="cartList.length!=0"
     >
       <el-table-column type="selection" width="55" />
       <el-table-column label="商品信息" width="120">
@@ -102,12 +92,12 @@ const allCheckHandler=(event:any)=>{
 
       <el-table-column label="操作" minWidth="120">
         <template #default="scope">
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">移入收藏夹</el-button>
+          <el-button size="small" @click="moveHandler(scope.$index, scope.row)">移入收藏夹</el-button>
           <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <div class="cartmsg pad10 f14">
+    <div class="cartmsg pad10 f14" v-if="cartList.length!=0">
       <el-row class="row-bg" justify="space-between" align="middle">
         <el-col :span="3"><el-checkbox class="mid" @change="allCheckHandler">全选</el-checkbox><span class="marginl10 mid cursor">删除</span></el-col>
         <el-col :span="9">
@@ -123,6 +113,7 @@ const allCheckHandler=(event:any)=>{
         </el-col>
       </el-row>
     </div>
+    <el-empty description="购物车暂无数据" v-if="cartList.length==0" />
     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="热卖推荐" name="first">
         <el-row :gutter="10">

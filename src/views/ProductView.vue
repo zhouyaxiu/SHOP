@@ -27,7 +27,7 @@ const closeHandler = (names:String) => {
 <template>
   <div class="product">
     <div class="">
-      <img src="https://img0.baidu.com/it/u=650116751,1388415960&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" width="100%" />
+      <img src="../assets/product.jpg" width="100%" />
     </div>
     <div class="main_wrapper">
       <div class="product_series f14 marginb20">

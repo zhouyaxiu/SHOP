@@ -1,21 +1,19 @@
 <template>
  <teleport to="body">
     <el-dialog
-        v-model="visible"
-        :title="title"
-        :width="width + 'px'"
-        :before-close="onClose"
-        append-to-body
-        :close-on-click-modal="false"
+      v-model="visible"
+      :title="title"
+      :width="width + 'px'"
+      :before-close="onClose"
+      append-to-body
+      :close-on-click-modal="false"
     >
         <div class="container" :style="{ height: height + 'px' }">
         <slot name="content"></slot>
         </div>
         <template #footer>
-        <span>
-            <el-button @click="onClose">取消</el-button>
-            <el-button @click="onConfirm" color="#e77547" :dark="isDark" class="custom_btn">confirm</el-button>
-        </span>
+          <el-button @click="onClose">取消</el-button>
+          <el-button @click="onConfirm" color="#e77547" :dark="isDark" class="custom_btn">确定</el-button>
         </template>
     </el-dialog>
    </teleport>

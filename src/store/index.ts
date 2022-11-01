@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
-export const useUserStore=defineStore("useUserStore",{
+export const useInfoStore =defineStore({
+    id:"GlobalStore1",
     state:()=>{
         return {
             islogin:false,
@@ -38,7 +39,13 @@ export const useUserStore=defineStore("useUserStore",{
                 count:192
               }
             ],
-            windowHeight:document.documentElement.clientHeight-231
+            proList:[{pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:0,sale:100,rule:'性感',price:100},
+                {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:1,sale:100,rule:'性感',price:100},
+                {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:2,sale:100,rule:'性感',price:100},
+                {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:3,sale:100,rule:'性感',price:100},
+                {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:4,sale:100,rule:'性感',price:100},
+                {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:5,sale:100,rule:'性感',price:100},],
+            windowHeight:document.documentElement.clientHeight-230
         }
     },
     getters:{
@@ -48,5 +55,10 @@ export const useUserStore=defineStore("useUserStore",{
         // handleCollapse(state:any){
         //     state.isCollapse=!state.isCollapse;
         // }
+        resizeWidowHeight(state:any){
+          window.onresize=()=>{
+            state.windowHeight=document.documentElement.clientHeight-230
+          }
+        }
     }
 })

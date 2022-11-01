@@ -1,7 +1,7 @@
 import HomeView from '@/views/HomeView.vue'
 const defaultRoutes:any=[
     {
-        path: '/',
+        path: '/home',
         name: 'home',
         component: HomeView
     },
@@ -34,6 +34,11 @@ const defaultRoutes:any=[
         path: '/cart',
         name: 'cart',
         component: () => import('@/views/CartView.vue')
+    },
+    {
+        path: '/pay',
+        name: 'pay',
+        component: () => import('@/views/PayView.vue')
     },
 ]
 

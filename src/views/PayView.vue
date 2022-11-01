@@ -1,37 +1,46 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+import  {useInfoStore} from '../store';
+const router = useRouter();
+const store = useInfoStore();
+
+const windowHeight=store.windowHeight
+
+const goHome=()=>{
+  router.push("/home")
+}
+const goOrder=()=>{
+  router.push("/user/order")
+}
 
 </script>
 
 <template>
-  <div class="main_wrapper product">
-    <div>支付成功</div>
-    <div>￥99</div>
+  <div class="main_wrapper product" :style="{height:windowHeight+'px'}">
     <el-result
       icon="success"
-      title="Success Tip"
-      sub-title="Please follow the instructions"
+      title="支付成功"
+      sub-title="支付单号:119299333"
     >
       <template #extra>
-        <el-button type="primary">Back</el-button>
+        <el-button color="#ec7243" :dark="isDark" class="custom_btn" @click="goHome">返回首页</el-button>
+        <el-button :dark="isDark" class="custom_plain_btn" @click="goOrder">我的订单</el-button>
       </template>
     </el-result>
-    <div>
+    <div class="marginb36">
       <el-descriptions
-        title="Vertical list with border"
+        title="订单信息"
         direction="vertical"
-        :column="4"
+        :column="3"
         :size="size"
         border
       >
-        <el-descriptions-item label="Username">kooriookami</el-descriptions-item>
-        <el-descriptions-item label="Telephone">18100000000</el-descriptions-item>
-        <el-descriptions-item label="Place" :span="2">Suzhou</el-descriptions-item>
-        <el-descriptions-item label="Remarks">
-          <el-tag size="small">School</el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item label="Address"
-          >No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
-        </el-descriptions-item>
+        <el-descriptions-item label="订单号">284732875478</el-descriptions-item>
+        <el-descriptions-item label="支付时间">2022-11-11 11:00:00</el-descriptions-item>
+        <el-descriptions-item label="支付金额">￥333</el-descriptions-item>
+        <el-descriptions-item label="收件人">周小姐</el-descriptions-item>
+        <el-descriptions-item label="收货号码">1382874837854</el-descriptions-item>
+        <el-descriptions-item label="收货地址">苏州市工业园区健康卡简单快捷接口是否健康</el-descriptions-item>
       </el-descriptions>
     </div>
   </div>
