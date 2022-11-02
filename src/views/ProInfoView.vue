@@ -1,7 +1,9 @@
 <template>
   <div class="main_wrapper">
-    <div class="f14 marginb20">
-      <span class="marginr30">首页</span><el-icon class="marginr30 mid f12 c999"><ArrowRight /></el-icon><span class="marginr30">产品</span><el-icon class="marginr30 mid f12 c999"><ArrowRight /></el-icon><span>热销系列</span>
+    <div class="f14 marginb20 padt10">
+      <span class="marginr30 cursor" @click="goHome">首页</span><el-icon class="marginr30 mid f12 c999"><DArrowRight /></el-icon>
+        <span class="marginr30 cursor" @click="goPro">产品</span><el-icon class="marginr30 mid f12 c999"><DArrowRight /></el-icon>
+        <span>热销系列</span>
     </div>
     <div class="marginb20">
       <el-row :gutter="20">
@@ -25,7 +27,7 @@
               <span class="marginr30">月销量：2222</span><el-divider direction="vertical" class="marginr30" /><span>库存：292</span>
             </div>
             <div class="marginb20">
-              <el-tag v-for="tag in tags" :key="tag.name" type="info" class="cursor marginr10" @close="closeHandler(tag.name)" effect="plain">
+              <el-tag v-for="tag in tags" @click="swicthTag(tag.name)" :key="tag.name" type="info" :class="['cursor marginr10',{bgselected:tagname==tag.name},{cff:tagname==tag.name}]" effect="plain">
                 {{ tag.name }}
               </el-tag>
             </div>
@@ -58,7 +60,7 @@
             <div class="malr16">
               <div class="pad10 f14 center historyitem borb cursor" v-for="i in 4" :key="i" @click="goProInfo(i)">
                 <img class="marginb6" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" alt="">
-                <div class="marginb6">商品一号</div>
+                <div class="marginb6 f12">商品一号</div>
                 <div>¥455</div>
               </div>
             </div>
@@ -79,10 +81,10 @@
 
   const tags = ref([
     { name: '阿道夫'},
-    { name: '阿道夫'},
-    { name: '阿道夫'},
-    { name: '阿道夫'},
-    { name: '阿道夫'},
+    { name: '阿道夫1'},
+    { name: '阿道夫2'},
+    { name: '阿道夫3'},
+    { name: '阿道夫4'},
   ])
   const goodsImages=reactive([
     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F52e2494a33d20.jpg&refer=http%3A%2F%2Fpic1.win4000.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=74b1f4b7a668a540d97a32dec80528e3",
@@ -92,7 +94,8 @@
     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FIT47Vbh_HhEmuNOzOX_FCA%3D%3D%2F2565081462765696500.jpg&refer=http%3A%2F%2Fimg.bimg.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=e2a09775fdf68879e551d6ef94f9fe95",
   ])
   const bgImg=ref(goodsImages[0])
-  const num = ref(1)
+  const num = ref(1);
+  const tagname=ref("阿道夫")
 
   // 数量变动
   const handleChange = (value: number) => {
@@ -117,11 +120,26 @@
   const goProInfo=(id:string)=>{
     router.push('/product/'+id)
   }
+
+  // 首页
+  const goHome=(id:string)=>{
+    router.push("/");
+  }
+  // 产品
+  const goPro=(id:string)=>{
+    router.push("/product");
+  }
+
+  // 切换分类
+  const swicthTag=(tagnames:string)=>{
+    tagname.value=tagnames
+  }
 </script>
 
 <style scoped>
   .historylist{border:1px solid #dedede;}
   .historyitem:last-child{border-bottom: 0;}
-  .historyitem img{width:80%;border-radius: 4px;}
+  .historyitem img{width:100%;border-radius: 4px;}
   .oldprice{text-decoration: line-through;}
+  .el-tag.bgselected{border-color: #ec7243;}
 </style>

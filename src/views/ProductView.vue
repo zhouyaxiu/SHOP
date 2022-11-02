@@ -1,7 +1,7 @@
 <template>
   <div class="product">
-    <div class="">
-      <img src="../assets/product.jpg" width="100%" />
+    <div class="marginb20">
+      <img src="../assets/product.jpg" class="w100" />
     </div>
     <div class="main_wrapper">
       <div class="product_series f14 marginb20">

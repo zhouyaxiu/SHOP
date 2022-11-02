@@ -70,9 +70,11 @@
   import Item from '../components/pro_item.vue';
   import type {cartItem,ProItem} from "../type/BaseType";
   import  {useInfoStore} from '../store';
+  import {ElNotification} from "element-plus";
   const store = useInfoStore();
   import { useRouter } from 'vue-router';
   const router = useRouter();
+  const multipleTableRef = ref();
 
   const multipleSelection = ref<cartItem[]>([]);
   const cartList:cartItem[]=store.cartList;
@@ -96,7 +98,14 @@
 
   // 移入收藏夹
   const moveHandler=(index:number,row:cartItem)=>{
-  console.log(index,row,'roww')
+    if(multipleTableRef.value.getSelectionRows().length==0 || !index){
+      ElNotification.error({title:'没有选中商品'});
+      return;
+    }
+    // 移入全部选中
+    console.log(multipleTableRef.value.getSelectionRows())
+    // 单个选中
+    // console.log(index,row,'roww')
   }
 
   // 结算
@@ -105,9 +114,10 @@
   }
 
   // 清空购物车
-  const clearHandler=(index:number,row:cartItem)=>{
-
+  const clearHandler=()=>{
+    store.cartList=[]
   }
+
   // 数量变动
   const handleChange = (value: number,index:number) => {
     cartList[index].count=Number(cartList[index].goodsprice)*cartList[index].goodsnum
@@ -120,12 +130,8 @@
   }
 
   // 全选
-  const allCheckHandler=(event:any)=>{
-    if(event){
-      multipleSelection.value=cartList
-    }else{
-      multipleSelection.value=[]
-    }
+  const allCheckHandler=()=>{
+    multipleTableRef.value.toggleAllSelection();
   }
 </script>
 
@@ -136,4 +142,6 @@
 <style>
   .cart .el-tabs__item.is-active,.cart .el-tabs__item:hover{color:#ec7243;}
   .cart .el-tabs__active-bar{background: #ec7243;}
+  .cart .el-checkbox__input.is-checked .el-checkbox__inner{background: #ec7243!important;border-color:#ec7243!important}
+  .cart .el-checkbox__input.is-checked+.el-checkbox__label{color:#ec7243;}
 </style>

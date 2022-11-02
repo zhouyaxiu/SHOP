@@ -47,7 +47,7 @@
           </el-table-column>
           <el-table-column label="数量">
             <template #default="scope">
-              <el-input-number v-model="scope.row.goodsnum" :min="1" @change="handleChange($event,scope.$index)" />
+              <el-input-number style="width:120px" v-model="scope.row.goodsnum" :min="1" @change="handleChange($event,scope.$index)" />
             </template>
           </el-table-column>
           <el-table-column property="count" label="金额">
@@ -55,8 +55,7 @@
               <span class="f12">¥ </span>{{scope.row.count}}
             </template>
           </el-table-column>
-
-          <el-table-column label="操作" minWidth="120">
+          <el-table-column label="操作" minWidth="100">
             <template #default="scope">
               <el-button size="small" @click="moveFav(scope.$index, scope.row)">移入收藏夹</el-button>
               <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
@@ -72,8 +71,8 @@
       </el-row>
     </div>
     <el-divider />
-    <div class="right marginb20">
-      <span>已选商品 阿德撒旦1 件</span>
+    <div class="right marginb20 f14">
+      <span>已选商品 1 件</span>
       <span class="marginr30">合计（不含运费）：<span class="ec7">￥1200</span></span>
       <el-button color="#ec7243" size="large" :dark="isDark" class="custom_btn" @click="settleHandler">结算</el-button>
     </div>
@@ -129,5 +128,10 @@
   //移入收藏夹
   const moveFav=(index:number,item:object)=>{
     ElNotification.success({title:'移入收藏夹成功'})
+  }
+
+  // 删除
+  const handleDelete=(index:number,item:object)=>{
+    ElNotification.success({title:'删除成功'})
   }
 </script>
