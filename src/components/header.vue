@@ -1,22 +1,3 @@
-<script setup lang="ts">
-import {watchEffect,ref} from "vue"
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const toUrl = (routeUrl: string) => {
-  router.push(routeUrl)
-}
-const activeUrl=ref("/home")
-watchEffect(() => {
-  router.getRoutes().map((item, index) => {
-    if(item.path === router.currentRoute.value.path){
-      activeUrl.value = router.currentRoute.value.path
-    }
-  })
-})
-</script>
-
 <template>
   <el-row align="middle" class="pad10">
     <el-col :span="4">
@@ -48,5 +29,22 @@ watchEffect(() => {
       </el-row>
     </el-col>
   </el-row>
-
 </template>
+
+<script setup lang="ts">
+  import {watchEffect,ref} from "vue";
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const toUrl = (routeUrl: string) => {
+    router.push(routeUrl)
+  }
+  const activeUrl=ref("/home")
+  watchEffect(() => {
+    router.getRoutes().map((item, index) => {
+      if(item.path === router.currentRoute.value.path){
+        activeUrl.value = router.currentRoute.value.path
+      }
+    })
+  })
+</script>

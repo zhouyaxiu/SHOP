@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="footer pad16">
     <el-row align="middle" class="main_wrapper">
@@ -24,6 +20,7 @@
     </el-row>
   </div>
 </template>
+
 <style scoped>
-.footer{overflow: hidden;}
+  .footer{overflow: hidden;}
 </style>

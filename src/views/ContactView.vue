@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import  {useInfoStore} from '../store';
-const store = useInfoStore();
-
-const windowHeight=store.windowHeight
-</script>
-
 <template>
   <div :style="{height:windowHeight+'px'}">
     <div class="">
@@ -18,6 +11,14 @@ const windowHeight=store.windowHeight
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+  import  {useInfoStore} from '../store';
+  const store = useInfoStore();
+
+  const windowHeight=store.windowHeight
+</script>
+
 <style scoped>
   .concat{padding:100px;}
 </style>

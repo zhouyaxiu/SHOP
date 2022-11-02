@@ -1,27 +1,3 @@
-<script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { ref,onMounted,watchEffect} from 'vue'
-const router = useRouter();
-const item = {
-  date: '2016-05-02',
-  name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles',
-}
-const tableData = ref(Array.from({ length: 20 }).fill(item))
-
-import  {useInfoStore} from '../store';
-const store = useInfoStore()
-const windowHeight=store.windowHeight
-const activeMenu=ref("/user/order")
-watchEffect(() => {
-  router.getRoutes().map((item, index) => {
-    if(item.path === router.currentRoute.value.path){
-      activeMenu.value = router.currentRoute.value.path
-    }
-  })
-})
-</script>
-
 <template>
   <div class="user">
     <div class="flex main_wrapper" :style="{height:windowHeight+'px'}">
@@ -60,9 +36,37 @@ watchEffect(() => {
           </transition>
         </router-view>
       </div>
-  </div>
+    </div>
+
   </div>
 </template>
+
+<script setup lang="ts">
+  import { useRouter } from 'vue-router';
+  import { ref,watchEffect} from 'vue';
+  const router = useRouter();
+  import {useInfoStore} from '../store';
+  const store = useInfoStore();
+
+  const item = {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  }
+
+  const tableData = ref(Array.from({ length: 20 }).fill(item));
+  
+  const windowHeight=store.windowHeight;
+  const activeMenu=ref("/user/order");
+  watchEffect(() => {
+    router.getRoutes().map((item, index) => {
+      if(item.path === router.currentRoute.value.path){
+        activeMenu.value = router.currentRoute.value.path
+      }
+    })
+  })
+</script>
+
 <style scoped>
-.user .el-menu{border-right: 0;background: #f9f9f9;}
+  .user .el-menu{border-right: 0;background: #f9f9f9;}
 </style>

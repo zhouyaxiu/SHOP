@@ -1,43 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import type {cartItem} from "../type/BaseType"
-import SysDialog from "@/components/SysDialog.vue";
-import useDialog from "@/hooks/useDialog";
-const { dialog, onClose, onConfirm } = useDialog();
-const radio1 = ref('1')
-
-
-const cartList:cartItem[]=[
-  {
-    id:1,
-    goodsname: '阿达说法萨芬',
-    goodsprice: '192',
-    goodsnum: 1,
-    count:192
-  },{
-    id:2,
-    goodsname: '而恒天然恒天然和',
-    goodsprice: '345',
-    goodsnum: 2,
-    count:192
-  },{
-    id:3,
-    goodsname: '阿发是否',
-    goodsprice: '13',
-    goodsnum: 3,
-    count:192
-  },
-  
-]
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-// 结算
-const settleHandler=()=>{
-  router.push("/pay")
-}
-</script>
-
 <template>
   <div class="main_wrapper confirm">
     <div class="marginb36 padt10">
@@ -98,7 +58,7 @@ const settleHandler=()=>{
 
           <el-table-column label="操作" minWidth="120">
             <template #default="scope">
-              <el-button size="small" @click="handleEdit(scope.$index, scope.row)">移入收藏夹</el-button>
+              <el-button size="small" @click="moveFav(scope.$index, scope.row)">移入收藏夹</el-button>
               <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -107,34 +67,67 @@ const settleHandler=()=>{
       <el-row>
         <el-col :span="2" class="right"><span>给我留言：</span></el-col>
         <el-col :span="22">
-          <el-input
-            v-model="textarea2"
-            :autosize="{ minRows: 2, maxRows: 4 }"
-            type="textarea"
-            placeholder="留言已和商家确认"
-          />
+          <el-input v-model="textarea2" :autosize="{ minRows: 2, maxRows: 4 }" type="textarea" placeholder="留言已和商家确认" />
         </el-col>
       </el-row>
     </div>
     <el-divider />
     <div class="right marginb20">
-        <span>已选商品 阿德撒旦1 件</span>
-        <span class="marginr30">合计（不含运费）：<span class="ec7">￥1200</span></span>
-        <el-button color="#ec7243" :dark="isDark" class="custom_btn" @click="settleHandler">结算</el-button>
+      <span>已选商品 阿德撒旦1 件</span>
+      <span class="marginr30">合计（不含运费）：<span class="ec7">￥1200</span></span>
+      <el-button color="#ec7243" size="large" :dark="isDark" class="custom_btn" @click="settleHandler">结算</el-button>
     </div>
   </div>
   <!-- 物流弹框 -->
-  <sys-dialog
-    :visible="dialog.visible"
-    @onClose="onClose"
-    @onConfirm="onConfirm"
-  >
+  <sys-dialog :visible="dialog.visible" @onClose="onClose" @onConfirm="onConfirm">
     <template v-slot:content>
-      <addAddress @onClose="onClose"
-    @onConfirm="onConfirm"></addAddress>
+      <addAddress @onClose="onClose" @onConfirm="onConfirm"></addAddress>
     </template>
   </sys-dialog>
 </template>
-<style>
 
-</style>
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import type {cartItem} from "../type/BaseType"
+  import SysDialog from "@/components/SysDialog.vue";
+  import useDialog from "@/hooks/useDialog";
+  const { dialog, onClose, onConfirm } = useDialog();
+  import {ElNotification} from "element-plus";
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const radio1 = ref('1');
+
+  const cartList:cartItem[]=[
+    {
+      id:1,
+      goodsname: '阿达说法萨芬',
+      goodsprice: '192',
+      goodsnum: 1,
+      count:192
+    },{
+      id:2,
+      goodsname: '而恒天然恒天然和',
+      goodsprice: '345',
+      goodsnum: 2,
+      count:192
+    },{
+      id:3,
+      goodsname: '阿发是否',
+      goodsprice: '13',
+      goodsnum: 3,
+      count:192
+    },
+    
+  ]
+ 
+  // 结算
+  const settleHandler=()=>{
+    router.push("/pay");
+  }
+
+  //移入收藏夹
+  const moveFav=(index:number,item:object)=>{
+    ElNotification.success({title:'移入收藏夹成功'})
+  }
+</script>

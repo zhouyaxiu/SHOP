@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import {defineProps} from "vue";
-defineProps({
-  title:String
-})
-</script>
-
 <template>
   <div class="title">
     <el-icon class="mid marginr10" size="20px">
@@ -14,3 +7,10 @@ defineProps({
     </el-icon><span class="relative line">{{title}}</span>
   </div>
 </template>
+
+<script setup lang="ts">
+  import {defineProps} from "vue";
+  defineProps({
+    title:String
+  })
+</script>

@@ -1,66 +1,3 @@
-<script setup lang="ts">
-import {ref,computed,onMounted} from "vue"
-import Item from '../components/pro_item.vue'
-// import {TabsPaneContext} from "element-plus"
-import type {cartItem,ProItem} from "../type/BaseType"
-import  {useInfoStore} from '../store';
-const store = useInfoStore()
-// const {scartList} = storeToRefs(store)
-const multipleSelection = ref<cartItem[]>([])
-const cartList:cartItem[]=store.cartList
-const count=computed((val)=>{
-  let sum=0;
-  cartList.map((item)=>{return sum+(Number(item.goodsprice)*item.goodsnum)},0)
-  return sum;
-})
-
-const handleSelectionChange = (val: cartItem[]) => {
-  multipleSelection.value = val
-}
-
-// 删除
-const handleDelete=(index:number,row:cartItem)=>{
-
-}
-// 移入收藏夹
-const moveHandler=(index:number,row:cartItem)=>{
- console.log(index,row,'roww')
-}
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-// 结算
-const settleHandler=(index:number,row:cartItem)=>{
-  router.push("/confirm")
-}
-// 清空购物车
-const clearHandler=(index:number,row:cartItem)=>{
-
-}
-// 数量变动
-const handleChange = (value: number,index:number) => {
-  cartList[index].count=Number(cartList[index].goodsprice)*cartList[index].goodsnum
-  return count
-}
-
-
-const activeName=ref('first')
-const handleClick=(tab:any,event:any)=>{
-  console.log(tab,event)
-}
-
-// 产品
-const proList:ProItem[]=store.proList
-// 全选
-const allCheckHandler=(event:any)=>{
-  if(event){
-    multipleSelection.value=cartList
-  }else{
-    multipleSelection.value=[]
-  }
-}
-</script>
-
 <template>
   <div class="main_wrapper cart pad16">
     <el-table
@@ -113,7 +50,7 @@ const allCheckHandler=(event:any)=>{
         </el-col>
       </el-row>
     </div>
-    <el-empty description="购物车暂无数据" v-if="cartList.length==0" />
+    <el-empty description="您的购物车空空如也。。。" v-if="cartList.length==0" />
     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="热卖推荐" name="first">
         <el-row :gutter="10">
@@ -127,10 +64,76 @@ const allCheckHandler=(event:any)=>{
     </el-tabs>
   </div>
 </template>
+
+<script setup lang="ts">
+  import {ref,computed} from "vue";
+  import Item from '../components/pro_item.vue';
+  import type {cartItem,ProItem} from "../type/BaseType";
+  import  {useInfoStore} from '../store';
+  const store = useInfoStore();
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const multipleSelection = ref<cartItem[]>([]);
+  const cartList:cartItem[]=store.cartList;
+  // 产品
+  const proList:ProItem[]=store.proList;
+
+  const count=computed((val)=>{
+    let sum=0;
+    cartList.map((item)=>{return sum+(Number(item.goodsprice)*item.goodsnum)},0)
+    return sum;
+  })
+
+  const handleSelectionChange = (val: cartItem[]) => {
+    multipleSelection.value = val
+  }
+
+  // 删除
+  const handleDelete=(index:number,row:cartItem)=>{
+
+  }
+
+  // 移入收藏夹
+  const moveHandler=(index:number,row:cartItem)=>{
+  console.log(index,row,'roww')
+  }
+
+  // 结算
+  const settleHandler=(index:number,row:cartItem)=>{
+    router.push("/confirm")
+  }
+
+  // 清空购物车
+  const clearHandler=(index:number,row:cartItem)=>{
+
+  }
+  // 数量变动
+  const handleChange = (value: number,index:number) => {
+    cartList[index].count=Number(cartList[index].goodsprice)*cartList[index].goodsnum
+    return count
+  }
+
+  const activeName=ref('first')
+  const handleClick=(tab:any,event:any)=>{
+    console.log(tab,event)
+  }
+
+  // 全选
+  const allCheckHandler=(event:any)=>{
+    if(event){
+      multipleSelection.value=cartList
+    }else{
+      multipleSelection.value=[]
+    }
+  }
+</script>
+
 <style scoped>
-.cartmsg{background:#ededed}
+  .cartmsg{background:#ededed}
 </style>
+
 <style>
-.cart .el-tabs__item.is-active,.cart .el-tabs__item:hover{color:#ec7243;}
-.cart .el-tabs__active-bar{background: #ec7243;}
+  .cart .el-tabs__item.is-active,.cart .el-tabs__item:hover{color:#ec7243;}
+  .cart .el-tabs__active-bar{background: #ec7243;}
 </style>
