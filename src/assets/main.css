@@ -12,7 +12,7 @@
 .flex1{flex:1}
 .acenter{align-items: center;}
 .cff{color:#fff;}
-.ec7{color:#ec7243}
+.ec7{color:#ec7243!important;}
 .c999{color:#999;}
 .bff{background: #fff;}
 .b99{background: #f9f9f9;}
@@ -42,3 +42,4 @@
 .bold{font-weight: bold;}
 .bor50{border-radius: 50%;}
 .w100{width:100%;}
+.userno{user-select: none;}

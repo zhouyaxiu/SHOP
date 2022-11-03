@@ -12,7 +12,7 @@
             <image-magnifier :src="bgImg" :zoom-src="bgImg" width="360" height="300" zoom-width="360" zoom-height="300"></image-magnifier>
           </div>
           <el-row :gutter="3" align="middle">
-            <el-col :span="4" v-for="item in goodsImages" :key="item" @click="switchBgImg(item)">
+            <el-col :span="4" v-for="item in goodsImages.slice(0,5)" :key="item" @click="switchBgImg(item)">
               <img :src="item" width="60" height="60" alt="">
             </el-col>
           </el-row>
@@ -91,6 +91,10 @@
     "https://img0.baidu.com/it/u=2503409062,3665795632&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800",
     "https://img1.baidu.com/it/u=918819583,3845093189&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800",
     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F201506%2F14%2F20150614122829_jQ8FV.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=9c601936f1678f1fea8a188c4a5d57cf",
+    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FIT47Vbh_HhEmuNOzOX_FCA%3D%3D%2F2565081462765696500.jpg&refer=http%3A%2F%2Fimg.bimg.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=e2a09775fdf68879e551d6ef94f9fe95",
+    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FIT47Vbh_HhEmuNOzOX_FCA%3D%3D%2F2565081462765696500.jpg&refer=http%3A%2F%2Fimg.bimg.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=e2a09775fdf68879e551d6ef94f9fe95",
+    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FIT47Vbh_HhEmuNOzOX_FCA%3D%3D%2F2565081462765696500.jpg&refer=http%3A%2F%2Fimg.bimg.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=e2a09775fdf68879e551d6ef94f9fe95",
+    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FIT47Vbh_HhEmuNOzOX_FCA%3D%3D%2F2565081462765696500.jpg&refer=http%3A%2F%2Fimg.bimg.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=e2a09775fdf68879e551d6ef94f9fe95",
     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FIT47Vbh_HhEmuNOzOX_FCA%3D%3D%2F2565081462765696500.jpg&refer=http%3A%2F%2Fimg.bimg.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669943827&t=e2a09775fdf68879e551d6ef94f9fe95",
   ])
   const bgImg=ref(goodsImages[0])

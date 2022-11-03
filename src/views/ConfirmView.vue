@@ -30,12 +30,7 @@
     <div>
       <div class="bold f18 borb padb10 marginb10">确认订单信息</div>
       <div class="marginb20">
-        <el-table
-          ref="multipleTableRef"
-          :data="cartList"
-          style="width: 100%"
-          @selection-change="handleSelectionChange"
-        >
+        <el-table ref="multipleTableRef" :data="cartList" style="width: 100%" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55" />
           <el-table-column label="商品信息" minWidth="220">
             <template #default="scope">{{ scope.row.goodsname }}</template>

@@ -5,9 +5,9 @@
     </div>
     <div class="main_wrapper">
       <div class="product_series f14 marginb20">
-        <span class="bgselected cff cursor">全部</span>
-        <span class="cursor">热销系列</span>
-        <span class="cursor">亲肤系列</span>
+        <span :class="['cursor',{bgselected:activeIndex==0},{cff:activeIndex==0}]" @click="activeIndex=0">全部</span>
+        <span :class="['cursor',{bgselected:activeIndex==1},{cff:activeIndex==1}]" @click="activeIndex=1">热销系列</span>
+        <span :class="['cursor',{bgselected:activeIndex==2},{cff:activeIndex==2}]" @click="activeIndex=2">亲肤系列</span>
       </div>
       <div class="marginb20">
         <el-row :gutter="20" align="middle">
@@ -63,14 +63,14 @@
         </div>
       </div>
       <div class="pro_zonghe f14 c999 marginb20 flex">
-        <div class="active marginr30 cursor">
+        <div :class="['marginr30 cursor userno',{active:sortIndex==0}]" @click="sortIndex=0">
           <span>综合排序</span>
         </div>
-        <div class="marginr30 cursor">
-          <span>按价格排序<span>⬆⬇</span></span>
+        <div :class="['cursor userno marginr30',{active:sortIndex==1},{active:sortIndex==2}]" @click="priceHandler('price')">
+          <span>按价格排序<i :class="[{ec7:sortIndex==1}]">⬆</i><i :class="[{ec7:sortIndex==2}]">⬇</i></span>
         </div>
-        <div class="cursor">
-          <span>按销量排序<span>⬆⬇</span></span>
+        <div :class="['cursor userno',{active:sortIndex==3},{active:sortIndex==4}]" @click="priceHandler('sale')">
+          <span>按销量排序<i :class="[{ec7:sortIndex==3}]">⬆</i><i :class="[{ec7:sortIndex==4}]">⬇</i></span>
         </div>
       </div>
       <el-row :gutter="20" class="marginb20">
@@ -110,6 +110,33 @@
   const closeHandler = (names:String) => {
     console.log(names,'names')
   }
+
+  const activeIndex=ref(0)
+  const sortIndex=ref(0)
+  const flag=ref(true)
+  const priceHandler=(name:string)=>{
+    if(name=='price'){
+      if(flag.value){
+          flag.value=false;
+          sortIndex.value=1;
+          return
+        }else{
+          sortIndex.value=2;
+          flag.value=true;
+          return
+        }
+      }else{
+        if(flag.value){
+        flag.value=false;
+        sortIndex.value=3;
+        return
+      }else{
+        sortIndex.value=4;
+        flag.value=true;
+        return
+      }
+    }
+  }
 </script>
 
 <style scoped>
@@ -117,8 +144,9 @@
   .product .product_series span{padding:4px 20px;margin-right:30px;display: inline-block;}
   .product_title_item .product_title_item_right span{padding:4px 20px;margin-right:10px;}
   .pro_zonghe{border-bottom:1px solid #dedede;}
-  .pro_zonghe .active span{border-bottom:2px solid #333;color:#333;padding-bottom: 10px;display: inline-block;}
+  .pro_zonghe .active span:first-of-type{border-bottom:2px solid #ec7243;color:#ec7243;padding-bottom: 10px;display: inline-block;}
   .page .el-pagination{justify-content: center;}
+  .pro_zonghe span i{font-style: normal;color:#999;}
 </style>
 
 <style>

@@ -9,7 +9,7 @@
     <div>
       <!-- <v-title title="分类导航"></v-title> -->
       <el-row class="cff">
-        <el-col :span="6" v-for="i in 4" :key="i">
+        <el-col :span="6" v-for="i in 4" :key="i" @click="goPro(i)">
           <div :class="['head_ban_nav_item relative',{head_ban_nav_item_active:i==1}]">
             <div class="head_ban_nav_item_head">
               <div class="head_ban_nav_item_icon f18">Sexy Series</div>
@@ -18,7 +18,7 @@
             <div class="head_ban_nav_item_text f14">
               <div class="f18 bold">自由不受限</div>
               <div class="f18 bold marginb20">快乐无限</div>
-              <div class="cursor pad10 bff ec7"><span class="marginr10">立即抢购</span><el-icon class="mid"><Right /></el-icon></div>
+              <div :class="['cursor pad10 bff c999',{ec7:i==1}]"><span class="marginr10">立即抢购</span><el-icon class="mid"><Right /></el-icon></div>
             </div>
             <div class="head_ban_nav_item_img">
               <img class="mid" src="https://img1.baidu.com/it/u=1829027181,3693813016&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" width="100" height="100" />
@@ -30,17 +30,41 @@
     <!-- 分类导航 -->
     <div class="marginb20">
       <v-title title="分类导航"></v-title>
-      <el-row :gutter="20" justify="space-between" class="cff center">
-        <el-col :span="6" v-for="i in 4" :key="i">
+      <div class="cff center flex acenter">
+        <div v-for="i in 4" :key="i" class="flex1" style="padding-left:70px;">
           <div class="ban_nav_item cursor" @click="goPro(i)">
             <div class="ban_nav_item_icon"><el-icon :size="36"><img src="../assets/icon1.png" width="60"  /></el-icon></div>
             <div class="ban_nav_item_line"></div>
             <div class="ban_nav_item_text">纯棉类</div>
           </div>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </div>
-
+<!-- 滚动 -->
+    <div class="flex gundong">
+      <div class="flex1">
+        <el-row :gutter="16">
+          <el-col :span="8" v-for="item in gunList" :key="item.id" @click="goDetail(item.id)">
+            <div class="box">
+              <div class="glass"></div>
+              <div class="classify_item center cursor relative content">
+                <el-image :src="item.pic" class="mid" width="100%" />
+                <div class="pad10 cff f14">
+                  {{item.goodsname}}
+                </div>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="center padt10 marginl10">
+        <div class="marginb20 right cff">{{page}}/{{proList.length/3}}</div>
+        <div>
+          <el-icon class="b99 bor50 pad10 marginr10 cursor" @click="pageMinus"><ArrowLeft /></el-icon>
+          <el-icon class="b99 bor50 pad10 cursor" @click="pageAdd"><ArrowRight /></el-icon>
+        </div>
+      </div>
+    </div>
     <!-- 选择理由 -->
     <div class="">
       <v-title title="选择理由"></v-title>
@@ -64,7 +88,7 @@
         </el-row>
       </div>
     </div>
-
+    
     <!-- 分类 -->
     <div class="classify">
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
@@ -128,7 +152,7 @@
 </template>
 
 <script setup lang="ts">
-  import {ref} from "vue";
+  import {computed, ref} from "vue";
   import vTitle from '../components/title.vue';
   import Item from '../components/pro_item.vue';
   // import Ball from "../components/ball.vue";
@@ -144,12 +168,12 @@
     {pic:'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',id:3},
   ])
   const proList=ref<ProItem[]>([
-    {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:0,sale:100,rule:'性感',price:100},
-    {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:1,sale:100,rule:'性感',price:100},
-    {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:2,sale:100,rule:'性感',price:100},
-    {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:3,sale:100,rule:'性感',price:100},
-    {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:4,sale:100,rule:'性感',price:100},
-    {pic:'https://img0.baidu.com/it/u=1088754973,1390499664&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1666890000&t=20ffd12ef81a25e3465a45fef9a5a526',goodsname:'安居客库萨克积分',id:5,sale:100,rule:'性感',price:100},
+    {pic:'https://img2.baidu.com/it/u=4224973024,3399225311&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800',goodsname:'安居客库萨克积分',id:0,sale:100,rule:'性感',price:100},
+    {pic:'https://img2.baidu.com/it/u=4224973024,3399225311&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800',goodsname:'安居客库萨克积分',id:1,sale:100,rule:'性感',price:100},
+    {pic:'https://img2.baidu.com/it/u=4224973024,3399225311&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800',goodsname:'安居客库萨克积分',id:2,sale:100,rule:'性感',price:100},
+    {pic:'https://img2.baidu.com/it/u=4224973024,3399225311&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800',goodsname:'安居客库萨克积分',id:3,sale:100,rule:'性感',price:100},
+    {pic:'https://img2.baidu.com/it/u=4224973024,3399225311&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800',goodsname:'安居客库萨克积分',id:4,sale:100,rule:'性感',price:100},
+    {pic:'https://img2.baidu.com/it/u=4224973024,3399225311&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800',goodsname:'安居客库萨克积分',id:5,sale:100,rule:'性感',price:100},
   ])
   const activeName = ref('first');
   const handleClick = (tab:any, event: Event) => {
@@ -168,9 +192,34 @@
     router.push("/product");
   }
 
+  const goDetail=(id:string) => {
+    router.push('/product/'+id)
+  }
+
   // 立即购买
   const goConfirm=()=>{
     router.push("/confirm");
+  }
+  const page=ref(1)
+  const gunList=computed(()=>{
+    return proList.value.slice((page.value-1)*3,page.value*3)
+  })
+
+  // 前一页
+  const pageMinus=()=>{
+    if(page.value<=1){
+      page.value=proList.value.length/3
+      return
+    }
+    page.value--
+  }
+  // 下一页
+  const pageAdd=()=>{
+    if(page.value>=proList.value.length/3){
+      page.value=1
+      return
+    }
+    page.value++
   }
 </script>
 
@@ -191,8 +240,108 @@
   .home .hotsale img{border:4px solid #f96b2e;width:100%;position: absolute;max-height:200px;object-fit: cover;}
   .home .classify .el-col .classify_item{padding-top: 60px;background: linear-gradient(to right, #4d5359,#4d4d4f, #4d4d4e,#4a4a4b);}
   .home .classify .el-col .classify_item:hover{background:linear-gradient(to right, #dd7a46,#eb7d4a, #ee7b4d,#e78053);}
-  .home .classify img{width:120px;height:120px;border-radius: 50%;}
+  .home .classify .el-image{width:120px;height:120px;border-radius: 50%;}
   .home .classify .goodstitle{position: absolute;top: 10px;left: 10px;writing-mode: tb;position: absolute;top: 10px;left: 10px;writing-mode: tb;max-height: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+  /* .box .el-col .ban_nav_item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: #fff;
+            z-index: -1;
+        }
+
+        .box .el-col .ban_nav_item::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: #fff;
+            filter: blur(40px);
+            z-index: -2;
+        }
+.box .el-col:first-child .ban_nav_item::before{background: red;}
+        .box .el-col:first-child .ban_nav_item::before,
+        .box .el-col:first-child .ban_nav_item::after {
+          content:"";
+            background: linear-gradient(235deg, #89ff00, #010615, #00bcd4);
+        } */
+        .box {
+            position: relative;
+            /* width: 300px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #060c21;
+            margin: 60px 40px; */
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: #fff;
+            z-index: -1;
+        }
+
+        .box::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: #fff;
+            filter: blur(40px);
+            z-index: -2;
+        }
+        .gundong::after{
+          content:"";
+          position: absolute;
+          left:0;
+          top:0;
+          right:0;
+          bottom: 0;
+          background: #010615;
+          z-index:-20
+        }
+        .gundong{
+    position: relative;
+    padding: 20px;
+    margin-top: 20px;}
+        .gundong .el-col:nth-child(1) .box::before,
+        .gundong .el-col:nth-child(1) .box::after {
+            background: linear-gradient(235deg, #89ff00, #010615, #00bcd4);
+        }
+
+        .gundong .el-col:nth-child(2) .box::before,
+        .gundong .el-col:nth-child(2) .box::after {
+            background: linear-gradient(235deg, #ff005e, #010615, #fbff00);
+        }
+
+        .gundong .el-col:nth-child(3) .box::before,
+        .gundong .el-col:nth-child(3) .box::after {
+            background: linear-gradient(235deg, #772aff, #010615, #2196f3);
+        }
+
+
+        .box .glass {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            display: block;
+            background: rgba(255, 255, 255, .1);
+        }
 </style>
 
 <style>
