@@ -3,7 +3,7 @@
     <div class="">
       <img src="../assets/contact.jpg" class="w100" />
     </div>
-    <div class="concat marginb36">
+    <div class="concat padb10">
       <el-row :gutter="20" align="middle">
         <el-col :span="6" :offset="6">
           <div class="f12">联系电话：</div>
