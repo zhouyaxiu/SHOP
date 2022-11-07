@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path-browserify')
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
